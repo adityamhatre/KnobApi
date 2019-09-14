@@ -34,7 +34,7 @@ jar {
 }
 task copyJarToHome(type: Copy) {
     dependsOn jar
-    from 'build/libs/*.jar'
+    from 'build/libs/'
     from 'src/main/resources/application.properties'
     into '/home/aditya/'
 
@@ -42,4 +42,4 @@ task copyJarToHome(type: Copy) {
 }
 
 jar.dependsOn shadowJar
-jar.finalizedBy copyJarToHome
+shadowJar.finalizedBy copyJarToHome
