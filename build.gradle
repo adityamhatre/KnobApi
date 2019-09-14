@@ -4,7 +4,7 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
-version '1..0'
+version '1.0'
 
 sourceCompatibility = 1.8
 
@@ -30,6 +30,15 @@ jar {
                 'Main-Class': 'com.adityamhatre.knobapi.Application'
         )
     }
+    copyJarToHome
+}
+task copyJarToHome(type: Copy) {
+    dependsOn jar
+    from 'build/libs/*.jar'
+    from 'src/main/resources/application.properties'
+    into '/home/aditya/'
+
+    rename { String file -> file.contains(".jar") ? "app.jar" : file }
 }
 
 jar.dependsOn shadowJar
