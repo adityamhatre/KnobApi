@@ -31,4 +31,5 @@ jar {
         )
     }
 }
+
 jar.dependsOn shadowJar
