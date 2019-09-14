@@ -30,7 +30,7 @@ jar {
                 'Main-Class': 'com.adityamhatre.knobapi.Application'
         )
     }
-    copyJarToHome
+    finalizedBy copyJarToHome
 }
 task copyJarToHome(type: Copy) {
     dependsOn jar
