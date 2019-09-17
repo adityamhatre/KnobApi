@@ -1,8 +1,6 @@
 package com.adityamhatre.knobapi
 
-import com.pi4j.io.gpio.GpioController
-import com.pi4j.io.gpio.GpioFactory
-import com.pi4j.io.gpio.RaspiPin
+import com.pi4j.io.gpio.*
 
 class GPIOProvider private constructor() {
 
@@ -12,25 +10,17 @@ class GPIOProvider private constructor() {
         val instance by lazy { GPIOProvider() }
     }
 
-    fun setPinToOutput(pinNumber: Int) {
-        gpioInstance.provisionDigitalOutputPin(RaspiPin.getPinByAddress(pinNumber))
+    fun setPinToOutput(pinNumber: Int): GpioPinDigitalOutput {
+        return gpioInstance.provisionDigitalOutputPin(RaspiPin.getPinByAddress(pinNumber), PinState.LOW)
     }
 
-    fun setHigh(pinNumber: Int) {
-        set(pinNumber, 1)
-    }
-
-    fun setLow(pinNumber: Int) {
-        set(pinNumber, 0)
-    }
-
-    fun set(pinNumber: Int, state: Int) {
+    fun set(pin: GpioPinDigitalOutput, state: Int) {
         if (state == 1) {
-            gpioInstance.provisionDigitalOutputPin(RaspiPin.getPinByAddress(pinNumber)).high()
+            pin.high()
             return
         }
         if (state == 0) {
-            gpioInstance.provisionDigitalOutputPin(RaspiPin.getPinByAddress(pinNumber)).low()
+            pin.low()
         }
     }
 
