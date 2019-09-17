@@ -22,8 +22,8 @@ public class Application implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         controlPins.add(7);
-        controlPins.add(0);
         controlPins.add(2);
+        controlPins.add(0);
         controlPins.add(3);
 
         provisionedPins = controlPins.stream().map(pin -> GPIOProvider.Companion.getInstance().setPinToOutput(pin)).collect(Collectors.toList());
