@@ -28,6 +28,7 @@ class RestController {
                 for (pin in 0 until 4) {
                     GPIOProvider.instance.set(Application.provisionedPins[pin], halfStepSequence[halfStep][pin])
                 }
+                Thread.sleep(1)
             }
         }
     }
@@ -39,6 +40,7 @@ class RestController {
                 for (pin in 0 until 4) {
                     GPIOProvider.instance.set(Application.provisionedPins[pin], reverseHalfStepSequence[halfStep][pin])
                 }
+                Thread.sleep(1)
             }
         }
     }
