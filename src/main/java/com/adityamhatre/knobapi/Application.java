@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 @SpringBootApplication
 public class Application implements ApplicationRunner {
-    static List<Integer> controlPins = new ArrayList<>(4);
+    private static List<Integer> controlPins = new ArrayList<>(4);
     static List<GpioPinDigitalOutput> provisionedPins = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -20,7 +20,7 @@ public class Application implements ApplicationRunner {
     }
 
     @Override
-    public void run(ApplicationArguments args) throws Exception {
+    public void run(ApplicationArguments args) {
         controlPins.add(7);
         controlPins.add(2);
         controlPins.add(0);
