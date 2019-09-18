@@ -37,7 +37,7 @@ task copyJarToHome(type: Copy) {
     dependsOn jar
     from 'build/libs/'
     from 'src/main/resources/application.properties'
-    into '/home/aditya/'
+    into '/home/aditya/dist/'
 
     rename { String file -> file.contains(".jar") ? "app.jar" : file }
 }
