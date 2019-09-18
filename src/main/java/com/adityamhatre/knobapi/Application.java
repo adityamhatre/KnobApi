@@ -26,6 +26,6 @@ public class Application implements ApplicationRunner {
         controlPins.add(0);
         controlPins.add(3);
 
-        provisionedPins = controlPins.stream().map(pin -> GPIOProvider.Companion.getInstance().setPinToOutput(pin)).collect(Collectors.toList());
+//        provisionedPins = controlPins.stream().map(pin -> GPIOProvider.Companion.getInstance().setPinToOutput(pin)).collect(Collectors.toList());
     }
 }
