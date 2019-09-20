@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/knobapi")
 class RestController {
 
-    private var lastPosition = ""
+    //    private var lastPosition = ""
+    private var state = false
     private val motorStepAngle = 1.8
 
     private val halfStepSequence =
@@ -38,7 +39,6 @@ class RestController {
 
     @RequestMapping("/unlock")
     fun lock(): Map<String, Any?> {
-        if (lastPosition == "UNLOCKED") return failedAlreadyInUnlockedPositionJson
         if (isTurning) return failedKnobTurningJson
         isTurning = !isTurning
         try {
@@ -53,7 +53,6 @@ class RestController {
                     Thread.sleep(1)
                 }
             }
-            lastPosition = "UNLOCKED"
             clearMotor()
         } catch (ex: Exception) {
             return mapOf("success" to false, "errorReason" to ex.toString())
@@ -64,7 +63,6 @@ class RestController {
 
     @RequestMapping("/lock")
     fun unlock(): Map<String, Any?> {
-        if (lastPosition == "LOCKED") return failedAlreadyInLockedPositionJson
         if (isTurning) return failedKnobTurningJson
         isTurning = !isTurning
         try {
@@ -79,13 +77,19 @@ class RestController {
                     Thread.sleep(1)
                 }
             }
-            lastPosition = "LOCKED"
             clearMotor()
         } catch (ex: Exception) {
             return mapOf("success" to false, "errorReason" to ex.toString())
         }
         isTurning = !isTurning
         return successfulJson
+    }
+
+
+    @RequestMapping("/toggle")
+    fun toggle(): Map<String, Any?> {
+        state = !state
+        return if (state) lock() else unlock()
     }
 
     private fun clearMotor() {
