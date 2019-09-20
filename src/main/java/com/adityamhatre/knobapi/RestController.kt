@@ -30,7 +30,7 @@ class RestController {
     private val failedJson = mapOf("success" to false, "errorReason" to "Knob is turning")
     private val successfulJson = mapOf("success" to true, "errorReason" to null)
 
-    @RequestMapping("/lock")
+    @RequestMapping("/unlock")
     fun lock(): Map<String, Any?> {
         if (isTurning) return failedJson
         isTurning = !isTurning
@@ -53,7 +53,7 @@ class RestController {
         return successfulJson
     }
 
-    @RequestMapping("/unlock")
+    @RequestMapping("/lock")
     fun unlock(): Map<String, Any?> {
         if (isTurning) return failedJson
         isTurning = !isTurning
